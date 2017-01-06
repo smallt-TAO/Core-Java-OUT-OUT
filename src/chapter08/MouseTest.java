@@ -13,14 +13,46 @@ import javax.swing.*;
  */
 
 public class MouseTest {
-
+    public static void main(String[] args) {
+    	EventQueue.invokeLater(new Runnable() {
+    		public void run() {
+    			MouseFrame frame = new MouseFrame();
+    			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    			frame.setVisible(true);
+    		}
+    	});
+    }
 }
 
+
+/**
+ * A frame containing a panel for testing mouse operations.
+ */
+class MouseFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final int DEFAULT_WIDTH = 300;
+	private static final int DEFAULT_HEIGHT = 200;
+	
+ 	public MouseFrame() {
+		setTitle("MouseTest");
+		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		
+		MouseComponent component = new MouseComponent();
+		add(component);
+	}
+}
 
 /**
  * A component with mouse operations for adding and removing squares.
  */
 class MouseComponent extends JComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final int SIDELENGTH = 10;
 	private ArrayList<Rectangle2D> squares;
 	private Rectangle2D current;
@@ -84,28 +116,26 @@ class MouseComponent extends JComponent {
 				remove(current);
 		}
 	}
+	
+	private class MouseMotionHandler implements MouseMotionListener {
+		public void mouseMoved(MouseEvent event) {
+			// set the mouse cursor to cross hairs if it is inside a rectangle.
+			
+			if (find(event.getPoint()) == null) setCursor(Cursor.getDefaultCursor());
+			else
+				setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+		}
+		
+		
+		public void mouseDragged(MouseEvent event) {
+			if (current != null) {
+				int x = event.getX();
+				int y = event.getY();
+				
+				// drag the current rectangle to current it at(x, y).
+				current.setFrame(x - SIDELENGTH / 2, y - SIDELENGTH / 2, SIDELENGTH, SIDELENGTH);
+				repaint();
+			}
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
