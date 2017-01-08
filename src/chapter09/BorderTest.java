@@ -11,13 +11,25 @@ import javax.swing.border.*;
  *
  */
 public class BorderTest {
-
+    public static void main(String[] args) {
+    	EventQueue.invokeLater(new Runnable() {
+    		public void run() {
+    			BorderFrame frame = new BorderFrame();
+    			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    			frame.setVisible(true);
+    		}
+    	});
+    }
 }
 
 /**
  * A frame with radio button to pick a border style.
  */
 class BorderFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int DEFAULT_WIDTH = 600;
 	public static final int DEFAULT_HEIGHT = 200;
 	
