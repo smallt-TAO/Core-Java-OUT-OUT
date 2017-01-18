@@ -51,6 +51,7 @@ class CircleLayout implements LayoutManager {
 				maxComponentHeight = Math.max(maxComponentHeight,  d.height);
 				preferredWidth += d.width;
 				preferredHeight += d.height;
+				
 			}
 		}
 		
