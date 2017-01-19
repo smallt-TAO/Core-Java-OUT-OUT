@@ -54,7 +54,17 @@ class CircleLayout implements LayoutManager {
 				
 			}
 		}
-		
+		minWidth = preferredWidth / 2;
+		minHeight = preferredHeight / 2;
+		sizesSet = true;
+	}
+	
+	public Dimension preferredLayoutSize(Container parent) {
+		setSizes(parent);
+		Insets insets = parent.getInsets();
+		int width = preferredWidth + insets.left + insets.right;
+		int height = preferredHeight + insets.top + insets.bottom;
+		return new Dimension(width, height);
 	}
 }
 
