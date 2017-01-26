@@ -36,14 +36,37 @@ class ColorChooserFrame extends JFrame {
  * A panel with buttons to pop up three types of color choosers.
  */
 class ColorChooserPanel extends JPanel {
-	private JDialog dialog;
-	private JColorChooser chooser;
+	public ColorChooserPanel() {
+		JButton modalButton = new JButton("Modal");
+		modalButton.addActionListener(new ModalListener());
+		add(modalButton);
+		
+		JButton modelessButton = new JButton("modeless");
+		modelessButton.addActionListener(new ModelessListener());
+		add(modelessButton);
+		
+		JButton immediateButton = new JButton("Immediate");
+		immediateButton.addActionListener(new ImmediateListener());
+		add(immediateButton);
+	}
 	
+	/**
+	 * This listener pops up a modal color chooser
+	 */
+	private class ModalListener implements ActionListener {
+		public void actionPerformed(ActionEvent event) {
+			Color defaultColor = getBackground();
+			Color selected = JColorChooser.showDialog(ColorChooserPanel.this, "Set background", defaultColor);
+			if (selected != null) setBackground(selected);
+		}
+	}
 	/**
 	 * This listaner pops up a modeless color chooser. The panel color is changed
 	 * when the user clicks the Ok button.
 	 */
 	private class ModelessListener implements ActionListener {
+		private JDialog dialog;
+		private JColorChooser chooser;
 		public ModelessListener() {
 			chooser = new JColorChooser();
 			dialog = JColorChooser.createDialog(ColorChooserPanel.this, 
