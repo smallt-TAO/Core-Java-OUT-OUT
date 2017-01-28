@@ -11,13 +11,25 @@ import javax.swing.event.*;
  *
  */
 public class ColorChooserTest {
-
+    public static void main(String[] args) {
+    	EventQueue.invokeLater(new Runnable() {
+    		public void run() {
+    			ColorChooserFrame frame = new ColorChooserFrame();
+    			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    			frame.setVisible(true);
+    		}
+    	});
+    }
 }
 
 /**
  * A frame with a color chooser panel.
  */
 class ColorChooserFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int DEFAULT_WIDTH = 300;
 	public static final int DEFAULT_HEIGHT = 200;
 	
@@ -36,6 +48,11 @@ class ColorChooserFrame extends JFrame {
  * A panel with buttons to pop up three types of color choosers.
  */
 class ColorChooserPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ColorChooserPanel() {
 		JButton modalButton = new JButton("Modal");
 		modalButton.addActionListener(new ModalListener());
@@ -84,30 +101,31 @@ class ColorChooserPanel extends JPanel {
 		    dialog.setVisible(true);
 	    }
 	}
+	
+	/**
+	 * This listener pops up a modeless color chooser. The panel color is 
+	 * changed immediately when the user picks a new color.
+	 */
+	private class ImmediateListener implements ActionListener {
+		private JDialog dialog;
+		private JColorChooser chooser;
+		
+		public ImmediateListener() {
+			chooser = new JColorChooser();
+			chooser.getSelectionModel().addChangeListener(new ChangeListener() {
+               public void stateChanged(ChangeEvent event) {
+                  setBackground(chooser.getColor());
+               }
+            });
+			
+			dialog = new JDialog((Frame) null, false );
+			dialog.add(chooser);
+			dialog.pack();
+		}
+		
+		public void actionPerformed(ActionEvent event) {
+			chooser.setColor(getBackground());
+			dialog.setVisible(true);
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
