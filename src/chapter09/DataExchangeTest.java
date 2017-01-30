@@ -10,7 +10,9 @@ import javax.swing.*;
  *
  */
 public class DataExchangeTest {
-
+    public void main(String[] args) {
+    	
+    }
 }
 
 
