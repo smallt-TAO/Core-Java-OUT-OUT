@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package chapter09;
 
 import java.awt.*;
