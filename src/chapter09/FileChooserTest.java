@@ -9,7 +9,15 @@ import javax.swing.filechooser.*;
 import javax.swing.filechooser.FileFilter;
 
 public class FileChooserTest {
-
+    public static void main(String[] args) {
+    	EventQueue.invokeLater(new Runnable() {
+    		public void run() {
+    			ImageViewerFrame frame = new ImageViewerFrame();
+    			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    			frame.setVisible(true);
+    		}
+    	});
+    }
 }
 
 
@@ -64,7 +72,7 @@ class ImageViewerFrame extends JFrame {
 	      filter.addExtension("jpeg");
 	      filter.addExtension("gif");
 	      filter.setDescription("Image files");
-	      */
+	    */
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files", "jpg", "jpeg", "gif");
 		chooser.setFileFilter(filter);
 		
@@ -157,29 +165,3 @@ class ImagePreviewer extends JLabel {
 		});
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
