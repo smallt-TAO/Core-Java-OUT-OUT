@@ -10,7 +10,12 @@ import java.awt.*;
  */
 
 public class GBC extends GridBagConstraints{
-    public GBC(int gridx, int gridy) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public GBC(int gridx, int gridy) {
     	this.gridx = gridx;
     	this.gridy = gridy;
     }
@@ -36,6 +41,12 @@ public class GBC extends GridBagConstraints{
     	this.weightx = weightx;
     	this.weighty = weighty;
     	return this;
+    }
+    
+    public GBC setInsets(int distance)
+    {
+       this.insets = new Insets(distance, distance, distance, distance);
+       return this;
     }
     
     public GBC setInsets(int top, int left, int bottom, int right) {
